@@ -109,7 +109,7 @@ services:
       - 8080:8080
 ```
 
-[![Try in DECK](https://github.com/play-with-docker/stacks/raw/cff22438cb4195ace27f9b15784bbb497047afa7/assets/images/button.png)](http://play-with-docker.com?stack=https://raw.githubusercontent.com/docker-library/docs/9efeec18b6b2ed232cf0fbd3914b6211e16e242c/mariadb/stack.yml)
+[![Try in DECK](https://dabuttonfactory.com/button.png?t=Try+in+DECK&f=Vollkorn-Bold-Italic&ts=17&tc=fff&hp=45&vp=20&c=11&bgt=gradient&bgc=15d798&ebgc=073763&shs=6&shc=444&sho=s)](http://play-with-docker.com?stack=https://raw.githubusercontent.com/docker-library/docs/9efeec18b6b2ed232cf0fbd3914b6211e16e242c/mariadb/stack.yml)
 
 Run `docker stack deploy -c stack.yml mariadb` (or `docker-compose -f stack.yml up`), wait for it to initialize completely, and visit `http://swarm-ip:8080`, `http://localhost:8080`, or `http://host-ip:8080` (as appropriate).
 
