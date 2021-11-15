@@ -17,7 +17,7 @@ Also see the ["Getting Help with MariaDB" article on the MariaDB Knowledge Base]
 # Quick reference (cont.)
 
 -	**Where to file issues**:  
-	Issues can be filed on [https://github.com/deck-app/](https://github.com/deck-app/mariadb/issues) under the "MDEV" Project and "Docker" Component, or on [GitHub](https://github.com/deck-app/mariadb/issues)
+	Issues can be filed on [https://github.com/deck-app/](https://github.com/deck-app/mariadb/issues) "Docker compose" Component, or on [GitHub](https://github.com/deck-app/mariadb/issues)
 
 -	**Supported architectures**: ([more info](https://github.com/docker-library/official-images#architectures-other-than-amd64))  
 	[`amd64`](https://hub.docker.com/r/amd64/mariadb/), [`arm64v8`](https://hub.docker.com/r/arm64v8/mariadb/), [`ppc64le`](https://hub.docker.com/r/ppc64le/mariadb/), [`s390x`](https://hub.docker.com/r/s390x/mariadb/)
