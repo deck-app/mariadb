@@ -1,0 +1,48 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  mariadb:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the image mariadb 10.5
+        run: docker-compose build
+        env:
+          MARIADB_VERSION: "10.5"
+          DB_NAME: "test"
+          DB_USER: "admin"
+          DB_PASSWORD: "password"
+          DB_ROOT_PASSWORD: "password"
+
+      - name: Build the image mariadb 10.6
+        run: docker-compose build
+        env:
+          MARIADB_VERSION: "10.6"
+          DB_NAME: "test"
+          DB_USER: "admin"
+          DB_PASSWORD: "password"
+          DB_ROOT_PASSWORD: "password"
+
+      - name: Build the image mariadb 10.7
+        run: docker-compose build
+        env:
+          MARIADB_VERSION: "10.7"
+          DB_NAME: "test"
+          DB_USER: "admin"
+          DB_PASSWORD: "password"
+          DB_ROOT_PASSWORD: "password"
+
+      - name: Build the image mariadb latest
+        run: docker-compose build
+        env:
+          MARIADB_VERSION: "latest"
+          DB_NAME: "test"
+          DB_USER: "admin"
+          DB_PASSWORD: "password"
+          DB_ROOT_PASSWORD: "password"
