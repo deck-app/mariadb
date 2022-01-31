@@ -62,4 +62,6 @@ From the DECK app, go to stack list and click on `project's More > configure > A
 
 ### Rebuilding from terminal
 You have to rebuild the docker image after you make any changes to the project configuration, use the snippet below to rebuild and restart the stack
+```console
 docker-compose stop && docker-compose up --build -d
+```
