@@ -42,8 +42,6 @@ jobs:
         DB_USER: admin
         DB_NAME:  test
         MARIADB_VERSION: "10.6"
-    - name: Verify MySQL container
-      run:  docker-compose ps
     - name: Verify MySQL running from host, create Database and show Database
       run: |
         sleep 30s
@@ -62,8 +60,6 @@ jobs:
         DB_USER: admin
         DB_NAME:  test
         MARIADB_VERSION: "10.7"
-    - name: Verify MySQL container
-      run:  docker-compose ps
     - name: Verify MySQL running from host, create Database and show Database
       run: |
         sleep 30s
@@ -82,8 +78,6 @@ jobs:
         DB_USER: admin
         DB_NAME:  test
         MARIADB_VERSION: "latest"
-    - name: Verify MySQL container
-      run:  docker-compose ps
     - name: Verify MySQL running from host, create Database and show Database
       run: |
         sleep 30s
