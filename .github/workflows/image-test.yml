@@ -40,7 +40,7 @@ jobs:
     - name: Database connection check
       run: |
         docker exec mariadb_phpmyadmin_1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-        docker exec mariadb_phpmyadmin_1 php /var/wwwhtml//db.php
+        docker exec mariadb_phpmyadmin_1 php /var/www/html/db.php
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
