@@ -48,6 +48,8 @@ jobs:
       run:  |
         docker-compose -f "docker-compose.yml" down
         sudo rm -rf /tmp/db
+        echo "y" | docker image prune -a
+        echo "y" | docker volume prune
   Mariadb105-ARM64:
     runs-on: self-hosted
     steps:
@@ -86,11 +88,12 @@ jobs:
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
-        done
         while -d /tmp/maria; do
         echo "password" | sudo -S whoami
         sudo rm -rf /tmp/maria/
         done
+        echo "y" | docker image prune -a
+        echo "y" | docker volume prune
 
   Mariadb106-AMD64:
     runs-on: ubuntu-latest
@@ -131,6 +134,8 @@ jobs:
       run:  |
         docker-compose -f "docker-compose.yml" down
         sudo rm -rf /tmp/db
+        echo "y" | docker image prune -a
+        echo "y" | docker volume prune
   Mariadb106-ARM64:
     runs-on: self-hosted
     steps:
@@ -169,11 +174,12 @@ jobs:
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
-        done
         while -d /tmp/maria; do
         echo "password" | sudo -S whoami
         sudo rm -rf /tmp/maria/
         done
+        echo "y" | docker image prune -a
+        echo "y" | docker volume prune
 
   Mariadb107-AMD64:
     runs-on: ubuntu-latest
@@ -214,6 +220,8 @@ jobs:
       run:  |
         docker-compose -f "docker-compose.yml" down
         sudo rm -rf /tmp/db
+        echo "y" | docker image prune -a
+        echo "y" | docker volume prune
   Mariadb107-ARM64:
     runs-on: self-hosted
     steps:
@@ -252,11 +260,12 @@ jobs:
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
-        done
         while -d /tmp/maria; do
         echo "password" | sudo -S whoami
         sudo rm -rf /tmp/maria/
         done
+        echo "y" | docker image prune -a
+        echo "y" | docker volume prune
   
 
   Mariadb-latest-AMD64:
@@ -298,6 +307,8 @@ jobs:
       run:  |
         docker-compose -f "docker-compose.yml" down
         sudo rm -rf /tmp/db
+        echo "y" | docker image prune -a
+        echo "y" | docker volume prune
   Mariadb-latest-ARM64:
     runs-on: self-hosted
     steps:
@@ -336,8 +347,9 @@ jobs:
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
-        done
         while -d /tmp/maria; do
         echo "password" | sudo -S whoami
         sudo rm -rf /tmp/maria/
         done
+        echo "y" | docker image prune -a
+        echo "y" | docker volume prune
