@@ -24,7 +24,10 @@ jobs:
         DATA_PATH_HOST: /tmp/db
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        sleep 30s
+        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+            echo "Waiting for database connection..."
+            sleep 2
+        done
     - name: Check MariaDB version
       run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
@@ -57,10 +60,13 @@ jobs:
         DB_USER: admin
         DB_NAME:  test
         MARIADB_VERSION: "10.5"
-        DATA_PATH_HOST: /tmp/db
+        DATA_PATH_HOST: /tmp/maria
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        sleep 30s
+        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+            echo "Waiting for database connection..."
+            sleep 2
+        done
     - name: Check MariaDB version
       run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
@@ -80,7 +86,11 @@ jobs:
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
-        sudo rm -rf /tmp/db
+        done
+        while -d /tmp/maria; do
+        echo "password" | sudo -S whoami
+        sudo rm -rf /tmp/maria/
+        done
 
   Mariadb106-AMD64:
     runs-on: ubuntu-latest
@@ -97,7 +107,10 @@ jobs:
         DATA_PATH_HOST: /tmp/db
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        sleep 30s
+        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+            echo "Waiting for database connection..."
+            sleep 2
+        done
     - name: Check MariaDB version
       run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
@@ -130,10 +143,13 @@ jobs:
         DB_USER: admin
         DB_NAME:  test
         MARIADB_VERSION: "10.6"
-        DATA_PATH_HOST: /tmp/db
+        DATA_PATH_HOST: /tmp/maria
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        sleep 30s
+        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+            echo "Waiting for database connection..."
+            sleep 2
+        done
     - name: Check MariaDB version
       run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
@@ -153,7 +169,11 @@ jobs:
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
-        sudo rm -rf /tmp/db
+        done
+        while -d /tmp/maria; do
+        echo "password" | sudo -S whoami
+        sudo rm -rf /tmp/maria/
+        done
 
   Mariadb107-AMD64:
     runs-on: ubuntu-latest
@@ -170,7 +190,10 @@ jobs:
         DATA_PATH_HOST: /tmp/db
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        sleep 30s
+        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+            echo "Waiting for database connection..."
+            sleep 2
+        done
     - name: Check MariaDB version
       run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
@@ -203,10 +226,13 @@ jobs:
         DB_USER: admin
         DB_NAME:  test
         MARIADB_VERSION: "10.7"
-        DATA_PATH_HOST: /tmp/db
+        DATA_PATH_HOST: /tmp/maria
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        sleep 30s
+        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+            echo "Waiting for database connection..."
+            sleep 2
+        done
     - name: Check MariaDB version
       run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
@@ -226,7 +252,11 @@ jobs:
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
-        sudo rm -rf /tmp/db
+        done
+        while -d /tmp/maria; do
+        echo "password" | sudo -S whoami
+        sudo rm -rf /tmp/maria/
+        done
   
 
   Mariadb-latest-AMD64:
@@ -244,7 +274,10 @@ jobs:
         DATA_PATH_HOST: /tmp/db
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        sleep 30s
+        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+            echo "Waiting for database connection..."
+            sleep 2
+        done
     - name: Check MariaDB version
       run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
@@ -277,10 +310,13 @@ jobs:
         DB_USER: admin
         DB_NAME:  test
         MARIADB_VERSION: "latest"
-        DATA_PATH_HOST: /tmp/db
+        DATA_PATH_HOST: /tmp/maria
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        sleep 30s
+        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+            echo "Waiting for database connection..."
+            sleep 2
+        done
     - name: Check MariaDB version
       run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
@@ -300,4 +336,8 @@ jobs:
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
-        sudo rm -rf /tmp/db
+        done
+        while -d /tmp/maria; do
+        echo "password" | sudo -S whoami
+        sudo rm -rf /tmp/maria/
+        done
