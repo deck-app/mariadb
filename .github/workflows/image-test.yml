@@ -38,8 +38,8 @@ jobs:
       run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
-        docker exec mariadb_phpmyadmin_1 apt update
-        docker exec mariadb_phpmyadmin_1 apt install -y wget
+        docker exec mariadb_phpmyadmin_1 apk update
+        docker exec mariadb_phpmyadmin_1 apk add wget
     - name: Database connection check
       run: |
         docker exec mariadb_phpmyadmin_1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
@@ -85,8 +85,8 @@ jobs:
       run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
-        docker exec mariadb-phpmyadmin-1 apt update
-        docker exec mariadb-phpmyadmin-1 apt install -y wget
+        docker exec mariadb-phpmyadmin-1 apk update
+        docker exec mariadb-phpmyadmin-1 apk add wget
     - name: Database connection check
       run: |
         docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
@@ -130,8 +130,8 @@ jobs:
       run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
-        docker exec mariadb_phpmyadmin_1 apt update
-        docker exec mariadb_phpmyadmin_1 apt install -y wget
+        docker exec mariadb_phpmyadmin_1 apk update
+        docker exec mariadb_phpmyadmin_1 apk add wget
     - name: Database connection check
       run: |
         docker exec mariadb_phpmyadmin_1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
@@ -177,8 +177,8 @@ jobs:
       run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
-        docker exec mariadb-phpmyadmin-1 apt update
-        docker exec mariadb-phpmyadmin-1 apt install -y wget
+        docker exec mariadb-phpmyadmin-1 apk update
+        docker exec mariadb-phpmyadmin-1 apk add wget
     - name: Database connection check
       run: |
         docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
@@ -222,8 +222,8 @@ jobs:
       run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
-        docker exec mariadb_phpmyadmin_1 apt update
-        docker exec mariadb_phpmyadmin_1 apt install -y wget
+        docker exec mariadb_phpmyadmin_1 apk update
+        docker exec mariadb_phpmyadmin_1 apk add wget
     - name: Database connection check
       run: |
         docker exec mariadb_phpmyadmin_1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
@@ -269,8 +269,8 @@ jobs:
       run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
-        docker exec mariadb-phpmyadmin-1 apt update
-        docker exec mariadb-phpmyadmin-1 apt install -y wget
+        docker exec mariadb-phpmyadmin-1 apk update
+        docker exec mariadb-phpmyadmin-1 apk add wget
     - name: Database connection check
       run: |
         docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
@@ -315,8 +315,8 @@ jobs:
       run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
-        docker exec mariadb_phpmyadmin_1 apt update
-        docker exec mariadb_phpmyadmin_1 apt install -y wget
+        docker exec mariadb_phpmyadmin_1 apk update
+        docker exec mariadb_phpmyadmin_1 apk add wget
     - name: Database connection check
       run: |
         docker exec mariadb_phpmyadmin_1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
@@ -362,8 +362,8 @@ jobs:
       run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
-        docker exec mariadb-phpmyadmin-1 apt update
-        docker exec mariadb-phpmyadmin-1 apt install -y wget
+        docker exec mariadb-phpmyadmin-1 apk update
+        docker exec mariadb-phpmyadmin-1 apk add wget
     - name: Database connection check
       run: |
         docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
