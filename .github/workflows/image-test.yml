@@ -24,18 +24,18 @@ jobs:
         DATA_PATH_HOST: /tmp/db
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+        while ! docker exec mariadb_mysql_1 mysqladmin --user=root --password=password --host "mysql" ping --silent &> /dev/null ; do
             echo "Waiting for database connection..."
             sleep 2
         done
     - name: Check MariaDB version
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
-      run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb_mysql_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
     - name: Create a Database
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
     - name: Verify Database create or not
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
         docker exec mariadb_phpmyadmin_1 apt update
@@ -71,18 +71,18 @@ jobs:
         DATA_PATH_HOST: /tmp/maria
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        while ! docker exec mariadb-mariadb-1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+        while ! docker exec mariadb-mysql-1 mysqladmin --user=root --password=password --host "mysql" ping --silent &> /dev/null ; do
             echo "Waiting for database connection..."
             sleep 2
         done
     - name: Check MariaDB version
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
-      run:  docker exec mariadb-mariadb-1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb-mysql-1 mysql -uadmin -ppassword -e "SHOW DATABASES"
     - name: Create a Database
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
     - name: Verify Database create or not
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
         docker exec mariadb-phpmyadmin-1 apt update
@@ -116,18 +116,18 @@ jobs:
         DATA_PATH_HOST: /tmp/db
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+        while ! docker exec mariadb_mysql_1 mysqladmin --user=root --password=password --host "mysql" ping --silent &> /dev/null ; do
             echo "Waiting for database connection..."
             sleep 2
         done
     - name: Check MariaDB version
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
-      run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb_mysql_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
     - name: Create a Database
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
     - name: Verify Database create or not
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
         docker exec mariadb_phpmyadmin_1 apt update
@@ -163,18 +163,18 @@ jobs:
         DATA_PATH_HOST: /tmp/maria
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        while ! docker exec mariadb-mariadb-1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+        while ! docker exec mariadb-mysql-1 mysqladmin --user=root --password=password --host "mysql" ping --silent &> /dev/null ; do
             echo "Waiting for database connection..."
             sleep 2
         done
     - name: Check MariaDB version
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
-      run:  docker exec mariadb-mariadb-1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb-mysql-1 mysql -uadmin -ppassword -e "SHOW DATABASES"
     - name: Create a Database
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
     - name: Verify Database create or not
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
         docker exec mariadb-phpmyadmin-1 apt update
@@ -208,18 +208,18 @@ jobs:
         DATA_PATH_HOST: /tmp/db
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+        while ! docker exec mariadb_mysql_1 mysqladmin --user=root --password=password --host "mysql" ping --silent &> /dev/null ; do
             echo "Waiting for database connection..."
             sleep 2
         done
     - name: Check MariaDB version
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
-      run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb_mysql_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
     - name: Create a Database
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
     - name: Verify Database create or not
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
         docker exec mariadb_phpmyadmin_1 apt update
@@ -255,18 +255,18 @@ jobs:
         DATA_PATH_HOST: /tmp/maria
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        while ! docker exec mariadb-mariadb-1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+        while ! docker exec mariadb-mysql-1 mysqladmin --user=root --password=password --host "mysql" ping --silent &> /dev/null ; do
             echo "Waiting for database connection..."
             sleep 2
         done
     - name: Check MariaDB version
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
-      run:  docker exec mariadb-mariadb-1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb-mysql-1 mysql -uadmin -ppassword -e "SHOW DATABASES"
     - name: Create a Database
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
     - name: Verify Database create or not
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
         docker exec mariadb-phpmyadmin-1 apt update
@@ -301,18 +301,18 @@ jobs:
         DATA_PATH_HOST: /tmp/db
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+        while ! docker exec mariadb_mysql_1 mysqladmin --user=root --password=password --host "mysql" ping --silent &> /dev/null ; do
             echo "Waiting for database connection..."
             sleep 2
         done
     - name: Check MariaDB version
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
-      run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb_mysql_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
     - name: Create a Database
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
     - name: Verify Database create or not
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb_mysql_1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
         docker exec mariadb_phpmyadmin_1 apt update
@@ -348,18 +348,18 @@ jobs:
         DATA_PATH_HOST: /tmp/maria
     - name: Verify MariaDB running from host, create Database and show Database
       run: |
-        while ! docker exec mariadb-mariadb-1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+        while ! docker exec mariadb-mysql-1 mysqladmin --user=root --password=password --host "mysql" ping --silent &> /dev/null ; do
             echo "Waiting for database connection..."
             sleep 2
         done
     - name: Check MariaDB version
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
     - name: Verify MariaDB database from user
-      run:  docker exec mariadb-mariadb-1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb-mysql-1 mysql -uadmin -ppassword -e "SHOW DATABASES"
     - name: Create a Database
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
     - name: Verify Database create or not
-      run:  docker exec mariadb-mariadb-1 mysql -uroot -ppassword -e "SHOW DATABASES"
+      run:  docker exec mariadb-mysql-1 mysql -uroot -ppassword -e "SHOW DATABASES"
     - name: Wget install
       run:  |
         docker exec mariadb-phpmyadmin-1 apt update
