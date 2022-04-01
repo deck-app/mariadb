@@ -42,8 +42,8 @@ jobs:
         docker exec mariadb_phpmyadmin_1 apk add wget
     - name: Database connection check
       run: |
-        docker exec mariadb_phpmyadmin_1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-        docker exec mariadb_phpmyadmin_1 php /var/www/html/db.php
+        docker exec mariadb_phpmyadmin_1 wget -O /var/www/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+        docker exec mariadb_phpmyadmin_1 php /var/www/db.php
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
@@ -89,8 +89,8 @@ jobs:
         docker exec mariadb-phpmyadmin-1 apk add wget
     - name: Database connection check
       run: |
-        docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-        docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
+        docker exec mariadb-phpmyadmin-1 wget -O /var/www/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+        docker exec mariadb-phpmyadmin-1 php /var/www/db.php
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
@@ -134,8 +134,8 @@ jobs:
         docker exec mariadb_phpmyadmin_1 apk add wget
     - name: Database connection check
       run: |
-        docker exec mariadb_phpmyadmin_1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-        docker exec mariadb_phpmyadmin_1 php /var/www/html/db.php
+        docker exec mariadb_phpmyadmin_1 wget -O /var/www/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+        docker exec mariadb_phpmyadmin_1 php /var/www/db.php
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
@@ -181,8 +181,8 @@ jobs:
         docker exec mariadb-phpmyadmin-1 apk add wget
     - name: Database connection check
       run: |
-        docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-        docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
+        docker exec mariadb-phpmyadmin-1 wget -O /var/www/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+        docker exec mariadb-phpmyadmin-1 php /var/www/db.php
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
@@ -226,8 +226,8 @@ jobs:
         docker exec mariadb_phpmyadmin_1 apk add wget
     - name: Database connection check
       run: |
-        docker exec mariadb_phpmyadmin_1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-        docker exec mariadb_phpmyadmin_1 php /var/www/html/db.php
+        docker exec mariadb_phpmyadmin_1 wget -O /var/www/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+        docker exec mariadb_phpmyadmin_1 php /var/www/db.php
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
@@ -273,8 +273,8 @@ jobs:
         docker exec mariadb-phpmyadmin-1 apk add wget
     - name: Database connection check
       run: |
-        docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-        docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
+        docker exec mariadb-phpmyadmin-1 wget -O /var/www/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+        docker exec mariadb-phpmyadmin-1 php /var/www/db.php
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
@@ -319,8 +319,8 @@ jobs:
         docker exec mariadb_phpmyadmin_1 apk add wget
     - name: Database connection check
       run: |
-        docker exec mariadb_phpmyadmin_1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-        docker exec mariadb_phpmyadmin_1 php /var/www/html/db.php
+        docker exec mariadb_phpmyadmin_1 wget -O /var/www/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+        docker exec mariadb_phpmyadmin_1 php /var/www/db.php
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
@@ -366,8 +366,8 @@ jobs:
         docker exec mariadb-phpmyadmin-1 apk add wget
     - name: Database connection check
       run: |
-        docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-        docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
+        docker exec mariadb-phpmyadmin-1 wget -O /var/www/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+        docker exec mariadb-phpmyadmin-1 php /var/www/db.php
     - name: Docker Image Down and data deleted
       run:  |
         docker-compose -f "docker-compose.yml" down
