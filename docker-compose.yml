@@ -1,6 +1,6 @@
 version: '3'
 services:
-  mariadb:
+  mysql:
     image: mariadb:${MARIADB_VERSION}
     environment:
       - 'MARIADB_DATABASE=${DB_NAME}'
@@ -13,7 +13,7 @@ services:
       - ${MYSQL_PORT}:3306
 
   phpmyadmin:
-    image: phpmyadmin:latest
+    image: deckapp/phpmyadmin:v4.9.7
     environment:
       - 'PMA_ARBITRARY=1'
       - 'MYSQL_USER=${DB_USER}'
