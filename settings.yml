@@ -8,7 +8,8 @@ user:
     type:
       select
     values:
-      - latest
+      - "10.10"
+      - 10.9
       - 10.7
       - 10.6
       - 10.5

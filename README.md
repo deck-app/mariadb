@@ -10,6 +10,8 @@ Also see the ["Getting Help with MariaDB" article on the MariaDB Knowledge Base]
 
 # Supported tags and respective `Docker compose file` links
 
+-	[`10.10`](https://github.com/deck-app/mariadb/blob/master/docker-compose.yml)
+-	[`10.9`](https://github.com/deck-app/mariadb/blob/master/docker-compose.yml)
 -	[`10.7`](https://github.com/deck-app/mariadb/blob/master/docker-compose.yml)
 -	[`10.6`](https://github.com/deck-app/mariadb/blob/master/docker-compose.yml)
 -	[`10.5`](https://github.com/deck-app/mariadb/blob/master/docker-compose.yml)

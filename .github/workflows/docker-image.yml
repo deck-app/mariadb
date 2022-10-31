@@ -38,10 +38,19 @@ jobs:
           DB_PASSWORD: "password"
           DB_ROOT_PASSWORD: "password"
 
-      - name: Build the image mariadb latest
+      - name: Build the image mariadb 10.9
         run: docker-compose build
         env:
-          MARIADB_VERSION: "latest"
+          MARIADB_VERSION: "10.9"
+          DB_NAME: "test"
+          DB_USER: "admin"
+          DB_PASSWORD: "password"
+          DB_ROOT_PASSWORD: "password"
+      
+      - name: Build the image mariadb 10.10
+        run: docker-compose build
+        env:
+          MARIADB_VERSION: "10.10"
           DB_NAME: "test"
           DB_USER: "admin"
           DB_PASSWORD: "password"
