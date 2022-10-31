@@ -8,8 +8,6 @@ user:
     type:
       select
     values:
-      - "10.10"
-      - 10.9
       - 10.7
       - 10.6
       - 10.5
