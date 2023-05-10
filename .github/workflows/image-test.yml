@@ -2,15 +2,20 @@ name: MariaDB
 
 on:
   schedule:
-  - cron:  '30 2 * * *'
+  - cron:  '30 22 * * *'
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
 
 jobs:
-  Mariadb105-AMD64:
-    runs-on: ubuntu-latest
+  Mariadb105:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, self-hosted]
+    runs-on: ${{ matrix.os }}
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image Mariadb 10.5
@@ -46,53 +51,66 @@ jobs:
         sudo rm -rf /tmp/db
         echo "y" | docker image prune -a
         echo "y" | docker volume prune
-  Mariadb105-ARM64:
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v2
-    - name : Folder check list
-      run:  |
-        while [ -d /tmp/maria ]; do
-        echo "password" | sudo -S whoami
-        sudo rm -rf /tmp/maria/
-        done
-    - name: Build the Docker image Mariadb 10.5
-      run: docker-compose -f "docker-compose.yml" up -d --build
-      env:
-        DB_ROOT_PASSWORD: password
-        DB_PASSWORD: password
-        DB_USER: admin
-        DB_NAME:  test
-        MARIADB_VERSION: "10.5"
-        DATA_PATH_HOST: /tmp/maria
-    - name: Verify MariaDB running from host, create Database and show Database
-      run: |
-        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
-            echo "Waiting for database connection..."
-            sleep 2
-        done
-    - name: Check MariaDB version
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
-    - name: Verify MariaDB database from user
-      run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
-    - name: Create a Database
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
-    - name: Verify Database create or not
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
-    # - name: Database connection check
-    #   run: |
-    #     docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-    #     docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
-    - name: Docker Image Down and data deleted
-      run:  |
-        docker-compose -f "docker-compose.yml" down
-        echo "y" | docker system prune -a
-        while -d /tmp/maria; do
-        echo "password" | sudo -S whoami
-        sudo rm -rf /tmp/maria/
-        done
-  Mariadb106-AMD64:
-    runs-on: ubuntu-latest
+    - name: Slack Notification
+      uses: 8398a7/action-slack@v3
+      with: 
+        status: ${{ job.status }}
+        fields: repo,message,commit,author,action,eventName,ref,workflow
+        channel: '#github_action_status'
+      if: always()
+  # Mariadb105-ARM64:
+  #   runs-on: self-hosted
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name : Folder check list
+  #     run:  |
+  #       while [ -d /tmp/maria ]; do
+  #       echo "password" | sudo -S whoami
+  #       sudo rm -rf /tmp/maria/
+  #       done
+  #   - name: Build the Docker image Mariadb 10.5
+  #     run: docker-compose -f "docker-compose.yml" up -d --build
+  #     env:
+  #       DB_ROOT_PASSWORD: password
+  #       DB_PASSWORD: password
+  #       DB_USER: admin
+  #       DB_NAME:  test
+  #       MARIADB_VERSION: "10.5"
+  #       DATA_PATH_HOST: /tmp/maria
+  #   - name: Verify MariaDB running from host, create Database and show Database
+  #     run: |
+  #       while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+  #           echo "Waiting for database connection..."
+  #           sleep 2
+  #       done
+  #   - name: Check MariaDB version
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+  #   - name: Verify MariaDB database from user
+  #     run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+  #   - name: Create a Database
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+  #   - name: Verify Database create or not
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
+  #   # - name: Database connection check
+  #   #   run: |
+  #   #     docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+  #   #     docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
+  #   - name: Docker Image Down and data deleted
+  #     run:  |
+  #       docker-compose -f "docker-compose.yml" down
+  #       echo "y" | docker system prune -a
+  #       while -d /tmp/maria; do
+  #       echo "password" | sudo -S whoami
+  #       sudo rm -rf /tmp/maria/
+  #       done
+
+  Mariadb106:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, self-hosted]
+    runs-on: ${{ matrix.os }}
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image Mariadb 10.6
@@ -128,53 +146,66 @@ jobs:
         sudo rm -rf /tmp/db
         echo "y" | docker image prune -a
         echo "y" | docker volume prune
-  Mariadb106-ARM64:
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v2
-    - name : Folder check list
-      run:  |
-        while [ -d /tmp/maria ]; do
-        echo "password" | sudo -S whoami
-        sudo rm -rf /tmp/maria/
-        done
-    - name: Build the Docker image Mariadb 10.6
-      run: docker-compose -f "docker-compose.yml" up -d --build
-      env:
-        DB_ROOT_PASSWORD: password
-        DB_PASSWORD: password
-        DB_USER: admin
-        DB_NAME:  test
-        MARIADB_VERSION: "10.6"
-        DATA_PATH_HOST: /tmp/maria
-    - name: Verify MariaDB running from host, create Database and show Database
-      run: |
-        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
-            echo "Waiting for database connection..."
-            sleep 2
-        done
-    - name: Check MariaDB version
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
-    - name: Verify MariaDB database from user
-      run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
-    - name: Create a Database
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
-    - name: Verify Database create or not
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
-    # - name: Database connection check
-    #   run: |
-    #     docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-    #     docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
-    - name: Docker Image Down and data deleted
-      run:  |
-        docker-compose -f "docker-compose.yml" down
-        echo "y" | docker system prune -a
-        while -d /tmp/maria; do
-        echo "password" | sudo -S whoami
-        sudo rm -rf /tmp/maria/
-        done
-  Mariadb107-AMD64:
-    runs-on: ubuntu-latest
+    - name: Slack Notification
+      uses: 8398a7/action-slack@v3
+      with: 
+        status: ${{ job.status }}
+        fields: repo,message,commit,author,action,eventName,ref,workflow
+        channel: '#github_action_status'
+      if: always()
+  # Mariadb106-ARM64:
+  #   runs-on: self-hosted
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name : Folder check list
+  #     run:  |
+  #       while [ -d /tmp/maria ]; do
+  #       echo "password" | sudo -S whoami
+  #       sudo rm -rf /tmp/maria/
+  #       done
+  #   - name: Build the Docker image Mariadb 10.6
+  #     run: docker-compose -f "docker-compose.yml" up -d --build
+  #     env:
+  #       DB_ROOT_PASSWORD: password
+  #       DB_PASSWORD: password
+  #       DB_USER: admin
+  #       DB_NAME:  test
+  #       MARIADB_VERSION: "10.6"
+  #       DATA_PATH_HOST: /tmp/maria
+  #   - name: Verify MariaDB running from host, create Database and show Database
+  #     run: |
+  #       while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+  #           echo "Waiting for database connection..."
+  #           sleep 2
+  #       done
+  #   - name: Check MariaDB version
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+  #   - name: Verify MariaDB database from user
+  #     run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+  #   - name: Create a Database
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+  #   - name: Verify Database create or not
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
+  #   # - name: Database connection check
+  #   #   run: |
+  #   #     docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+  #   #     docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
+  #   - name: Docker Image Down and data deleted
+  #     run:  |
+  #       docker-compose -f "docker-compose.yml" down
+  #       echo "y" | docker system prune -a
+  #       while -d /tmp/maria; do
+  #       echo "password" | sudo -S whoami
+  #       sudo rm -rf /tmp/maria/
+  #       done
+
+  Mariadb107:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, self-hosted]
+    runs-on: ${{ matrix.os }}
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image Mariadb 10.7
@@ -210,55 +241,67 @@ jobs:
         sudo rm -rf /tmp/db
         echo "y" | docker image prune -a
         echo "y" | docker volume prune
-  Mariadb107-ARM64:
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v2
-    - name : Folder check list
-      run:  |
-        while [ -d /tmp/maria ]; do
-        echo "password" | sudo -S whoami
-        sudo rm -rf /tmp/maria/
-        done
-    - name: Build the Docker image Mariadb 10.7
-      run: docker-compose -f "docker-compose.yml" up -d --build
-      env:
-        DB_ROOT_PASSWORD: password
-        DB_PASSWORD: password
-        DB_USER: admin
-        DB_NAME:  test
-        MARIADB_VERSION: "10.7"
-        DATA_PATH_HOST: /tmp/maria
-    - name: Verify MariaDB running from host, create Database and show Database
-      run: |
-        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
-            echo "Waiting for database connection..."
-            sleep 2
-        done
-    - name: Check MariaDB version
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
-    - name: Verify MariaDB database from user
-      run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
-    - name: Create a Database
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
-    - name: Verify Database create or not
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
-    # - name: Database connection check
-    #   run: |
-    #     docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-    #     docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
-    - name: Docker Image Down and data deleted
-      run:  |
-        docker-compose -f "docker-compose.yml" down
-        echo "y" | docker system prune -a
-        while -d /tmp/maria; do
-        echo "password" | sudo -S whoami
-        sudo rm -rf /tmp/maria/
-        done
+    - name: Slack Notification
+      uses: 8398a7/action-slack@v3
+      with: 
+        status: ${{ job.status }}
+        fields: repo,message,commit,author,action,eventName,ref,workflow
+        channel: '#github_action_status'
+      if: always()
+  # Mariadb107-ARM64:
+  #   runs-on: self-hosted
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name : Folder check list
+  #     run:  |
+  #       while [ -d /tmp/maria ]; do
+  #       echo "password" | sudo -S whoami
+  #       sudo rm -rf /tmp/maria/
+  #       done
+  #   - name: Build the Docker image Mariadb 10.7
+  #     run: docker-compose -f "docker-compose.yml" up -d --build
+  #     env:
+  #       DB_ROOT_PASSWORD: password
+  #       DB_PASSWORD: password
+  #       DB_USER: admin
+  #       DB_NAME:  test
+  #       MARIADB_VERSION: "10.7"
+  #       DATA_PATH_HOST: /tmp/maria
+  #   - name: Verify MariaDB running from host, create Database and show Database
+  #     run: |
+  #       while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+  #           echo "Waiting for database connection..."
+  #           sleep 2
+  #       done
+  #   - name: Check MariaDB version
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+  #   - name: Verify MariaDB database from user
+  #     run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+  #   - name: Create a Database
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+  #   - name: Verify Database create or not
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
+  #   # - name: Database connection check
+  #   #   run: |
+  #   #     docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+  #   #     docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
+  #   - name: Docker Image Down and data deleted
+  #     run:  |
+  #       docker-compose -f "docker-compose.yml" down
+  #       echo "y" | docker system prune -a
+  #       while -d /tmp/maria; do
+  #       echo "password" | sudo -S whoami
+  #       sudo rm -rf /tmp/maria/
+  #       done
   
 
-  Mariadb-latest-AMD64:
-    runs-on: ubuntu-latest
+  Mariadb-latest:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, self-hosted]
+    runs-on: ${{ matrix.os }}
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image Mariadb latest
@@ -294,48 +337,55 @@ jobs:
         sudo rm -rf /tmp/db
         echo "y" | docker image prune -a
         echo "y" | docker volume prune
-  Mariadb-latest-ARM64:
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v2
-    - name : Folder check list
-      run:  |
-        while [ -d /tmp/maria ]; do
-        echo "password" | sudo -S whoami
-        sudo rm -rf /tmp/maria/
-        done
-    - name: Build the Docker image Mariadb latest
-      run: docker-compose -f "docker-compose.yml" up -d --build
-      env:
-        DB_ROOT_PASSWORD: password
-        DB_PASSWORD: password
-        DB_USER: admin
-        DB_NAME:  test
-        MARIADB_VERSION: "latest"
-        DATA_PATH_HOST: /tmp/maria
-    - name: Verify MariaDB running from host, create Database and show Database
-      run: |
-        while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
-            echo "Waiting for database connection..."
-            sleep 2
-        done
-    - name: Check MariaDB version
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
-    - name: Verify MariaDB database from user
-      run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
-    - name: Create a Database
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
-    - name: Verify Database create or not
-      run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
-    # - name: Database connection check
-    #   run: |
-    #     docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
-    #     docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
-    - name: Docker Image Down and data deleted
-      run:  |
-        docker-compose -f "docker-compose.yml" down
-        echo "y" | docker system prune -a
-        while -d /tmp/maria; do
-        echo "password" | sudo -S whoami
-        sudo rm -rf /tmp/maria/
-        done
+    - name: Slack Notification
+      uses: 8398a7/action-slack@v3
+      with: 
+        status: ${{ job.status }}
+        fields: repo,message,commit,author,action,eventName,ref,workflow
+        channel: '#github_action_status'
+      if: always()
+  # Mariadb-latest-ARM64:
+  #   runs-on: self-hosted
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name : Folder check list
+  #     run:  |
+  #       while [ -d /tmp/maria ]; do
+  #       echo "password" | sudo -S whoami
+  #       sudo rm -rf /tmp/maria/
+  #       done
+  #   - name: Build the Docker image Mariadb latest
+  #     run: docker-compose -f "docker-compose.yml" up -d --build
+  #     env:
+  #       DB_ROOT_PASSWORD: password
+  #       DB_PASSWORD: password
+  #       DB_USER: admin
+  #       DB_NAME:  test
+  #       MARIADB_VERSION: "latest"
+  #       DATA_PATH_HOST: /tmp/maria
+  #   - name: Verify MariaDB running from host, create Database and show Database
+  #     run: |
+  #       while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
+  #           echo "Waiting for database connection..."
+  #           sleep 2
+  #       done
+  #   - name: Check MariaDB version
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW VARIABLES LIKE '%version%';"
+  #   - name: Verify MariaDB database from user
+  #     run:  docker exec mariadb_mariadb_1 mysql -uadmin -ppassword -e "SHOW DATABASES"
+  #   - name: Create a Database
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "CREATE DATABASE deckapp"
+  #   - name: Verify Database create or not
+  #     run:  docker exec mariadb_mariadb_1 mysql -uroot -ppassword -e "SHOW DATABASES"
+  #   # - name: Database connection check
+  #   #   run: |
+  #   #     docker exec mariadb-phpmyadmin-1 wget -O /var/www/html/db.php https://raw.githubusercontent.com/nabad600/apache_php/master/connection.php
+  #   #     docker exec mariadb-phpmyadmin-1 php /var/www/html/db.php
+  #   - name: Docker Image Down and data deleted
+  #     run:  |
+  #       docker-compose -f "docker-compose.yml" down
+  #       echo "y" | docker system prune -a
+  #       while -d /tmp/maria; do
+  #       echo "password" | sudo -S whoami
+  #       sudo rm -rf /tmp/maria/
+  #       done
