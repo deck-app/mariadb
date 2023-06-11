@@ -1,7 +1,7 @@
 version: '3'
 services:
   mariadb:
-    image: mariadb:${MARIADB_VERSION}
+    image: ghcr.io/deck-app/mariadb:${MARIADB_VERSION}
     environment:
       - 'MARIADB_DATABASE=${DB_NAME}'
       - 'MARIADB_USER=${DB_USER}'
