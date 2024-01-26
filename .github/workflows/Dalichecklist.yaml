@@ -16,14 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build the Docker image Mariadb ${{ matrix.pv }}
+      - name: Build the Docker image Mariadb ${{ matrix.mv }}
         run: docker-compose -f "docker-compose.yml" up -d --build
         env:
           DB_ROOT_PASSWORD: password
           DB_PASSWORD: password
           DB_USER: admin
           DB_NAME:  test
-          MARIADB_VERSION: ${{ matrix.pv }}
+          MARIADB_VERSION: ${{ matrix.mv }}
           DATA_PATH_HOST: /tmp/db
       - name: Verify MariaDB running from host, create Database and show Database
         run: |
@@ -55,7 +55,7 @@ jobs:
           SLACK_CHANNEL: github_action_status
           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'Post Content MariaDB ${{ matrix.pv }} AMD64 :rocket:'
+          SLACK_MESSAGE: 'Post Content MariaDB ${{ matrix.mv }} AMD64 :rocket:'
           SLACK_TITLE: Post Title
           SLACK_USERNAME: rtCamp
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -80,14 +80,14 @@ jobs:
       - name: Get the output
         run: |
           echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
-      - name: Build the Docker image Mariadb ${{ matrix.pv }}
+      - name: Build the Docker image Mariadb ${{ matrix.mv }}
         run: docker-compose -f "docker-compose.yml" up -d --build
         env:
           DB_ROOT_PASSWORD: password
           DB_PASSWORD: password
           DB_USER: admin
           DB_NAME:  test
-          MARIADB_VERSION: ${{ matrix.pv }}
+          MARIADB_VERSION: ${{ matrix.mv }}
           DATA_PATH_HOST: /tmp/db
       - name: Verify MariaDB running from host, create Database and show Database
         run: |
@@ -119,7 +119,7 @@ jobs:
           SLACK_CHANNEL: github_action_status
           SLACK_COLOR: ${{ job.status }}
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'Post Content MariaDB ${{ matrix.pv }} ARM64 :rocket:'
+          SLACK_MESSAGE: 'Post Content MariaDB ${{ matrix.mv }} ARM64 :rocket:'
           SLACK_TITLE: Post Title
           SLACK_USERNAME: rtCamp
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
