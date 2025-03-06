@@ -51,6 +51,10 @@ jobs:
         run: |
           echo "$ENV_TEST" > .env.test
         shell: bash
+      - name: Security Scan
+        uses: aquasecurity/trivy-action@v0.3.0
+        with:
+          image-ref: myapp:latest
       - name: Notify on SUCCESS
         if: ${{ SUCCESS() }}
         uses: ravsamhq/notify-slack-action@v2
