@@ -16,6 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: docker compose install
+        run: |
+            curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
       - name: Build the Docker image Mariadb ${{ matrix.mv }}
         run: docker-compose -f "docker-compose.yml" up -d --build
         env:
@@ -25,6 +29,8 @@ jobs:
           DB_NAME:  test
           MARIADB_VERSION: ${{ matrix.mv }}
           DATA_PATH_HOST: /tmp/db
+      - name: container name 
+        run: docker-compose ps
       - name: Verify MariaDB running from host, create Database and show Database
         run: |
           while ! docker exec mariadb_mariadb_1 mysqladmin --user=root --password=password --host "mariadb" ping --silent &> /dev/null ; do
@@ -52,7 +58,7 @@ jobs:
           echo "$ENV_TEST" > .env.test
         shell: bash
       - name: Security Scan
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.3.0
         with:
           image-ref: myapp:latest
       - name: Notify on SUCCESS
