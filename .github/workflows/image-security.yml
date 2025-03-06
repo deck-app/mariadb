@@ -22,10 +22,10 @@ jobs:
           image-ref: 'ghcr.io/deck-app/mariadb:10.7'
           exit-code: '1'
           ignore-unfixed: true
-          vuln-type: 'os,library'
-          format: 'template'
-          template: '@/contrib/sarif.tpl'
-          output: 'trivy-results.sarif'
+          # vuln-type: 'os,library'
+          # format: 'template'
+          # template: '@/contrib/sarif.tpl'
+          # output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
 
       - name: Upload Trivy scan results to GitHub Security tab
