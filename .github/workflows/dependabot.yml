@@ -1,10 +1,19 @@
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "npm" # or "maven", "pip", "docker", etc.
+    directory: "/"           # Location of the package manifest (e.g., package.json)
     schedule:
       interval: "daily"
-    branches:
-      - "main" # or "master"
-      - "deck-git"
-      - "feature/some-new-feature"
+    target-branch: "main"
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    target-branch: "dev"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "feature/new-feature"
